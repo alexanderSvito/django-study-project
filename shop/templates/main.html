@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Cars{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Alegreya|Merriweather+Sans|Pacifico&display=swap" rel="stylesheet">
+    <link href="{% static 'shop/main.css' %}" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body>
+    <header class="header">
+      Cars
+    </header>
+    <div id="app">
+      {% block content %}
+          <label for="search-field">Search:</label>
+          <form method="GET" action="/search">
+            <input name="q" id="search-field" placeholder="Enter search phrase" type="text">
+          </form>
+          <div style="display: flex; flex-direction: row">
+            {% for car in cars %}
+                <a href="/cars/{{ car.id }}">
+                    <div class="card">
+                        <h3>{{ car.name }}</h3>
+                        <div>
+                            {{ car.description |truncatewords:5 }}
+                        </div>
+                        <div>
+                            {{ car.price | floatformat }}$
+                        </div>
+                    </div>
+                </a>
+              {% endfor %}
+          </div>
+       {% endblock %}
+    </div>
+    <footer class="footer">
+      Contact
+    </footer>
+  </body>
+</html>

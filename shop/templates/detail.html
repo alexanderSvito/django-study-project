@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+
+{% block title %}{{ car.name }}{% endblock %}
+
+{% block content %}
+    <div class="big-card">
+        <h1>{{ car.name }}</h1>
+        <div>
+            {{ car.description }}
+        </div>
+        <h3>{{ car.price | floatformat }}$</h3>
+        <table>
+            <tr>
+                <td>Mileage</td>
+                <td>{{ car.mileage | floatformat }}</td>
+            </tr>
+            <tr>
+                <td>Fuel type</td>
+                <td>{{ car.fuel_type | title }}</td>
+            </tr>
+            <tr>
+                <td>Engine Volume</td>
+                <td>{{ car.engine_volume }} cm<sup>3</sup></td>
+            </tr>
+
+        </table>
+    </div>
+{% endblock %}

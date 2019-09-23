@@ -4,5 +4,7 @@ from shop import views
 
 
 urlpatterns = [
-    path("cars/<int:id>", views.list_cars)
+    path("cars/<int:id>", views.list_cars),
+    path("search", views.search),
+    path("", views.welcome)
 ]
