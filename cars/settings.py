@@ -62,6 +62,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.media',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -124,5 +125,10 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    #os.path.join(BASE_DIR, "uploads"),
     '/var/www/static/',
 ]
+
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+MEDIA_ROOT = 'uploads/'
+MEDIA_URL = '/uploads/'

@@ -10,28 +10,25 @@
   </head>
   <body>
     <header class="header">
-      Cars
+        <a href="/" class="gradient-text">Cars</a>
+        <div class="header-tabs">
+            {% if user.is_authenticated %}
+                <a href="/cart">cart</a>
+                <a href="/logout">logout</a>
+            {% else %}
+                <a href="/accounts/login">login</a>
+            {% endif %}
+        </div>
     </header>
     <div id="app">
       {% block content %}
-          <label for="search-field">Search:</label>
           <form method="GET" action="/search">
-            <input name="q" id="search-field" placeholder="Enter search phrase" type="text">
+            <input name="q" id="search-field" placeholder="Search" type="text">
           </form>
           <div style="display: flex; flex-direction: row">
             {% for car in cars %}
-                <a href="/cars/{{ car.id }}">
-                    <div class="card">
-                        <h3>{{ car.name }}</h3>
-                        <div>
-                            {{ car.description |truncatewords:5 }}
-                        </div>
-                        <div>
-                            {{ car.price | floatformat }}$
-                        </div>
-                    </div>
-                </a>
-              {% endfor %}
+                {% include 'common/card.html' %}
+            {% endfor %}
           </div>
        {% endblock %}
     </div>

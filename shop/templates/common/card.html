@@ -1,0 +1,14 @@
+<a href="/cars/{{ car.id }}">
+    <div class="card">
+        <h3>{{ car.name }}</h3>
+        <img
+            src="{{ car.picture.url }}"
+        >
+        <div class="desc">
+            {{ car.description |truncatechars:100 }}
+        </div>
+        <div class="price">
+            {{ car.price | floatformat }} руб.
+        </div>
+    </div>
+</a>

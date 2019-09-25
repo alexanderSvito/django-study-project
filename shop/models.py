@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from enum import Enum
 
@@ -16,11 +17,39 @@ class FuelType(Enum):
         ]
 
 
-class Car(models.Model):
+class Cart(models.Model):
+    created = models.DateTimeField(auto_now=True)
+    owner = models.ForeignKey(
+        User,
+        null=True,
+        related_name='carts',
+        on_delete=models.SET_NULL
+    )
+
+    @property
+    def price(self):
+        return self.items.all().values_list('price')
+
+
+class AbstractCar(models.Model):
     name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        abstract = True
+
+
+class CarItem(AbstractCar):
+    cart = models.ForeignKey(
+        Cart,
+        related_name='items',
+        on_delete=models.CASCADE
+    )
+
+
+class Car(AbstractCar):
     description = models.TextField()
     year = models.DateField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
     mileage = models.PositiveIntegerField()
     fuel_type = models.CharField(
         max_length=6,
@@ -28,6 +57,7 @@ class Car(models.Model):
     )
     engine_volume = models.PositiveIntegerField()
     color = models.CharField(max_length=6)
+    picture = models.ImageField(null=True, upload_to='img/')
 
     class Meta:
         pass

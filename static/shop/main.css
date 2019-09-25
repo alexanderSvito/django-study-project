@@ -1,16 +1,39 @@
 body {
   margin: 0;
+  background: #f4f4f4;
+}
+
+.gradient-text {
+  font-family: 'Pacifico', cursive;
+  font-size: 40px;
+  background: linear-gradient(45deg, #00b09b, #96c93d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #00b09b;
+  display: table;
+  margin-top: -20px;
+  margin-left: 30px;
+  transition: all 200ms ease-in-out;
+}
+
+.gradient-text:hover {
+  transform: translateY(-2px);
 }
 
 .header {
-  background: linear-gradient(45deg, #00b09b, #96c93d);
-  height: 70px;
-  box-shadow: grey 0px 1px 5px;
+  background: white;
+  height: 30px;
+  box-shadow: grey 0 1px 5px;
+
+  display: flex;
+  justify-content: space-between;
 
   color: white;
   font-size: 35px;
-  font-family: 'Pacifico', cursive;
-  padding: 1em;
+
+  padding: 25px;
+
+  border-bottom: #948e90 3px solid;
 }
 
 #app {
@@ -19,7 +42,11 @@ body {
   align-items: center;
   flex-direction: column;
   width: 100%;
-  min-height: 980px;
+  min-height: 580px;
+}
+
+form {
+  width: 100%;
 }
 
 .navbar {
@@ -27,6 +54,14 @@ body {
   flex-direction: column;
   width: 30%;
   border-right: grey solid 2px;
+}
+
+.header-tabs {
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 25px;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
 }
 
 .navbar a {
@@ -53,33 +88,73 @@ body {
 
 .card {
   background: white;
-  margin: 30px;
-  padding: 30px;
-  border-radius: 30px;
+  margin: 20px;
+  border-radius: 20px;
 
-  line-height: 1em;
-  text-indent: 10px;
+  position: relative;
 
   border: lighgray 1px solid;
   box-shadow: gray 3px 3px 5px;
 
-  font-size: 28px;
+  font-size: 20px;
   font-family: 'Alegreya', serif;
 
-  height: 300px;
-  width: 200px;
+  height: 400px;
+  width: 300px;
 
   overflow: hidden;
 
   transition: all ease-in-out 200ms;
 }
 
+hr {
+  border: 0;
+  border-top: 1px solid #a9a9a9;
+    /*Rest of stuff here*/
+}
+
+.card h3 {
+  margin: 25px;
+  position: absolute;
+  color: white;
+  font-size: 35px;
+  line-height: 1em;
+
+  text-shadow: black 2px 2px 4px;
+}
+
+.card img {
+  width: 320px;
+  height: 270px;
+  margin-left: -15px;
+  object-fit: cover;
+}
+
+.card .desc {
+  margin: 10px 20px;
+  font-size: 15px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.card .price {
+  float: right;
+  margin-right: 30px;
+  font-size: 25px;
+}
+
+.big-card input {
+  display: block;
+}
 
 .big-card {
   background: white;
   margin: 30px;
   padding: 30px;
   border-radius: 30px;
+
+  display: flex;
+  flex-direction: column;
 
   line-height: 1em;
   text-indent: 10px;
@@ -127,10 +202,11 @@ label {
 }
 
 #search-field {
-    height: 40px;
-    width: 50%;
+    height: 30px;
+    margin: 0 150px;
+    width: 80%;
 
-    padding: 10px;
+    padding: 1px 1px 1px 20px;
 
     font-family: 'Merriweather Sans', sans-serif;
 
