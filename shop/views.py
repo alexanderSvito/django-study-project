@@ -31,7 +31,7 @@ def login_view(request):
 
 @login_required
 def cart(request):
-    cart = request.user.carts.all()[-1]
+    cart = request.user.carts.all()[0]
     return render(request, 'cart.html', context={
         "cart": cart
     })
@@ -41,8 +41,11 @@ def logout_view(request):
     logout(request)
     return redirect("/")
 
+
 def welcome(request):
-    cars = Car.objects.all()[:3]
+    cars = Car.objects.all()[:7]
+    for idx, car in enumerate(cars):
+        car.doubled = idx % 6 == 0
     return render(request, "main.html", context={
         "cars": cars
     })

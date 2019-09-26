@@ -3,21 +3,18 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <div class="big-card">
+    <h1>Вход</h1>
+    <div class="big-card login-form">
         <form method="POST" action="/accounts/login/">
             {% csrf_token %}
             {% if error %}
-                <div style="color:#ff7f61; background-color: #f3b6cf; border: 2px solid red;">Something went wrong</div>
+                <div class="error">Something went wrong</div>
             {% endif %}
-            <label>
-                Username
-                <input name="username" type="text">
-            </label>
-            <label>
-                Password
-                <input name="password" type="password">
-            </label>
-            <input type="submit">
+
+            <input placeholder="Username" name="username" type="text" class="text-input">
+            <input placeholder="Password" name="password" type="password" class="text-input">
+
+            <input type="submit" class="submit-btn">
         </form>
     </div>
 {% endblock %}

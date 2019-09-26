@@ -3,24 +3,25 @@
 {% block title %}{{ car.name }}{% endblock %}
 
 {% block content %}
-    <div class="big-card">
+    <div class="big-card" style="padding: 25px;">
+
         <h1>{{ car.name }}</h1>
         <img src="{{ car.picture.url }}">
-        <div>
+        <div class="desc">
             {{ car.description }}
         </div>
         <h3>{{ car.price | floatformat }}$</h3>
         <table>
             <tr>
-                <td>Mileage</td>
-                <td>{{ car.mileage | floatformat }}</td>
+                <td>Пробег</td>
+                <td>{{ car.mileage | floatformat }} км</td>
             </tr>
             <tr>
-                <td>Fuel type</td>
+                <td>Тип топлива</td>
                 <td>{{ car.fuel_type | title }}</td>
             </tr>
             <tr>
-                <td>Engine Volume</td>
+                <td>Объём двигателя</td>
                 <td>{{ car.engine_volume }} cm<sup>3</sup></td>
             </tr>
 

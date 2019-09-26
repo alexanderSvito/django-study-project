@@ -1,5 +1,5 @@
 <a href="/cars/{{ car.id }}">
-    <div class="card">
+    <div class="card {% if car.doubled %}card-doubled{% endif %}">
         <h3>{{ car.name }}</h3>
         <img
             src="{{ car.picture.url }}"
