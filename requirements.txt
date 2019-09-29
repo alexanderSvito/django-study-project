@@ -7,3 +7,6 @@ MarkupSafe==1.1.1
 pytz==2019.2
 sqlparse==0.3.0
 Werkzeug==0.15.6
+numpy
+Pillow
+psycopg2

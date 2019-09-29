@@ -1,10 +1,10 @@
 {% extends "main.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Вход{% endblock %}
 
 {% block content %}
     <h1>Вход</h1>
-    <div class="big-card login-form">
+    <div class="big-card form">
         <form method="POST" action="/accounts/login/">
             {% csrf_token %}
             {% if error %}

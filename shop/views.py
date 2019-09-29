@@ -2,31 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
-from django.contrib.auth import authenticate, logout, login
 
 from shop.models import Car
 
-
-def login_view(request):
-    if request.method == 'GET':
-        return render(request, "login.html", context={
-            "error": False
-        })
-    elif request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(
-            username=username,
-            password=password
-        )
-        if user is not None:
-            login(request, user)
-            print(request.GET.get('next'))
-            return redirect('/')
-        else:
-            return render(request, "login.html", context={
-                "error": True
-            })
 
 
 @login_required
@@ -35,11 +13,6 @@ def cart(request):
     return render(request, 'cart.html', context={
         "cart": cart
     })
-
-
-def logout_view(request):
-    logout(request)
-    return redirect("/")
 
 
 def welcome(request):
