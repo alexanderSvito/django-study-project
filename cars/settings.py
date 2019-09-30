@@ -51,8 +51,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 ROOT_URLCONF = 'cars.urls'
 
 TEMPLATES = [
@@ -80,10 +78,10 @@ WSGI_APPLICATION = 'cars.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.sqlite3',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'NAME': 'cars',
+        'NAME': 'cars.db',
     },
 }
 
@@ -131,10 +129,14 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    #os.path.join(BASE_DIR, "uploads"),
     '/var/www/static/',
 ]
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 MEDIA_ROOT = 'uploads/'
 MEDIA_URL = '/uploads/'
+
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'admin@cars.com'

@@ -1,13 +1,15 @@
 import random
 import string
 import base64
+import urllib
 
 from django.core.signing import Signer
 
-ALPHABET = string.printable * 70
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+
+ALPHABET = (string.digits + string.ascii_letters + string.punctuation) * 70
 
 
 class User(AbstractUser):
@@ -31,22 +33,21 @@ class User(AbstractUser):
         self.save()
 
         signed_key = self.signer.sign(key)
-        print(signed_key)
-        return str(base64.b64encode(bytes(signed_key, encoding='ascii')))
+        encoded_key = base64.b64encode(bytes(signed_key, encoding='ascii')).decode('utf-8')
+        return encoded_key
 
     def verify_email(self):
         encoded_key = self.generate_key()
         url = "http://127.0.0.1:8000/verify?key={}".format(
-            encoded_key[2:-1]
+            urllib.parse.quote(encoded_key)
         )
         self.email_user(
             "Verification Link",
-            url,
+            "<a href={}>Подтвердить почтовый адрес</a>".format(url),
             "admin@cars.com"
         )
 
     def check_key(self, key):
-        signed_key = str(base64.b64decode(key))
-        print(signed_key)
+        signed_key = base64.b64decode(key).decode('utf-8')
         initial_key = self.signer.unsign(signed_key)
         return self.initial_secret_key == initial_key

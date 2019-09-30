@@ -12,6 +12,7 @@ def logout_view(request):
     logout(request)
     return redirect("/")
 
+
 def login_view(request):
     if request.method == 'GET':
         return render(request, "login.html", context={
@@ -40,7 +41,7 @@ def login_view(request):
                 "error": True
             })
 
-@csrf_exempt
+
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(
@@ -50,12 +51,13 @@ def register(request):
             user = form.save()
             login(request, user)
             user.verify_email()
-            redirect("/")
+            return render(request, "check_email.html")
     else:
         form = RegistrationForm()
     return render(request, "register.html", context={
         "form": form
     })
+
 
 @require_GET
 def verify_email(request):
@@ -63,4 +65,6 @@ def verify_email(request):
     if request.user.check_key(key):
         request.user.is_email_verified = True
         request.user.save()
-    redirect("/")
+        return render(request, "account_activated.html")
+    return redirect("/")
+

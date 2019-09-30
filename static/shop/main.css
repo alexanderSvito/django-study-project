@@ -346,3 +346,9 @@ input.submit-btn {
     box-shadow: lightgray 2px 2px 3px;
     text-shadow: lightgray 2px 2px 3px inset;
 }
+
+
+.info {
+    padding: 30px;
+
+}
