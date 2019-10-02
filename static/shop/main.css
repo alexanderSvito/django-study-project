@@ -347,8 +347,34 @@ input.submit-btn {
     text-shadow: lightgray 2px 2px 3px inset;
 }
 
-
 .info {
     padding: 30px;
+}
 
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+
+.cart {
+    padding: 20px;
+
+}
+
+.img-link {
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    border-radius: 50%;
+    background-color: #3e9513;
+    color: white;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 14px;
+    top: -4px;
+    right: -7px;
 }
