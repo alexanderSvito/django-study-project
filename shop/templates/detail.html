@@ -26,5 +26,9 @@
             </tr>
 
         </table>
+        <form method="post" action="{% url 'purchase-car' car.id %}">
+            {% csrf_token %}
+            <input class="btn submit-btn" type="submit" value="Купить">
+        </form>
     </div>
 {% endblock %}

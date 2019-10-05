@@ -1,0 +1,21 @@
+{% load static %}
+
+<header class="header">
+    <a href="/" class="gradient-text">Cars</a>
+    <div class="header-tabs">
+        <a class="img-link" href="/cart">
+            <img class="icon"
+                src="{% static 'shopping-cart.png' %}"
+            >
+            <span class="badge">
+                {{ cart.items_count }}
+            </span>
+        </a>
+        {% if user.is_authenticated %}
+            <a href="/logout">logout</a>
+        {% else %}
+            <a href="/register">register</a>
+            <a href="/accounts/login">login</a>
+        {% endif %}
+    </div>
+</header>

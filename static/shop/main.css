@@ -378,3 +378,21 @@ input.submit-btn {
     top: -4px;
     right: -7px;
 }
+
+.cancel {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.page-controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.page-controls a {
+    margin: 1em;
+    font-size: 24px;
+}

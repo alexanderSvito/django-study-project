@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <form method="GET" action="/search">
+    <input name="q" id="search-field" placeholder="Search" type="text">
+  </form>
+  <span>По запросу "{{ q }}" найдено {{ page.paginator.count }} машин.</span>
+  <div class="cards">
+    {% for car in page %}
+        {% include 'common/card.html' %}
+    {% endfor %}
+    <div class="page-controls">
+        {% if page.has_previous %}
+            <a href="?q={{ q }}&page={{ page.previous_page_number }}">Предыдущая</a>
+        {% endif %}
+        <span>{{ page.number }} / {{ page.paginator.num_pages }}</span>
+        {% if page.has_next %}
+            <a href="?q={{ q }}&page={{ page.next_page_number }}">Следующая</a>
+        {% endif %}
+    </div>
+  </div>
+{% endblock %}

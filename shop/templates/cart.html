@@ -4,7 +4,31 @@
 
 {% block content %}
     <div class="big-card">
-        HEllo! Youre in cart
-    {% lorem 100 %}
+        {% if cart.has_items %}
+            <table>
+                {% for item in cart.items.all %}
+                    <tr>
+                        <td>
+                            {{ item.name }}
+                        </td>
+                        <td>
+                            {{ item.price }} руб.
+                        </td>
+                        <td>
+                            <form method="POST"
+                                action="{% url 'remove-car-from-cart' item.id %}">
+                                {% csrf_token %}
+                                <input class="cancel" type="submit" value="x">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div>
+                {{ cart.price }}
+            </div>
+        {% else %}
+            Ваша корзина пуста
+        {% endif %}
     </div>
 {% endblock %}

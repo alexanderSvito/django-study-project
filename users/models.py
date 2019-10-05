@@ -3,17 +3,18 @@ import string
 import base64
 import urllib
 
-from django.core.signing import Signer
+from datetime import timedelta
+from django.core.signing import TimestampSigner
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from django.utils import timezone
 
 ALPHABET = (string.digits + string.ascii_letters + string.punctuation) * 70
 
 
 class User(AbstractUser):
-    signer = Signer()
+    signer = TimestampSigner(salt='Hello')
 
     email_verification_link = models.CharField(
         null=True,
@@ -41,6 +42,8 @@ class User(AbstractUser):
         url = "http://127.0.0.1:8000/verify?key={}".format(
             urllib.parse.quote(encoded_key)
         )
+        self.verification_email_sent_at = timezone.now()
+        self.save()
         self.email_user(
             "Verification Link",
             "<a href={}>Подтвердить почтовый адрес</a>".format(url),
@@ -49,5 +52,5 @@ class User(AbstractUser):
 
     def check_key(self, key):
         signed_key = base64.b64decode(key).decode('utf-8')
-        initial_key = self.signer.unsign(signed_key)
+        initial_key = self.signer.unsign(signed_key, max_age=timedelta(days=1))
         return self.initial_secret_key == initial_key
